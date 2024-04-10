@@ -70,3 +70,24 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+.vsconfig
+/[Aa]ssets/Adaptive Performance
+/[Aa]ssets/Adaptive Performance.meta
+/[Aa]ssets/YandexGame
+/ProjectSettings
+/[Aa]ssets/WebGlTemplates
+/Packages
+/[Aa]ssets/TextMesh Pro
+Assets/TextMesh Pro.meta
+Assets/WebGLTemplates.meta
+Assets/YandexGame.meta
+Build_7.zip
+Assets/Scenes/MainGame.unity.meta
+Assets/Scenes/
+Assets/Scenes.meta
+Assets/Resources/
+Assets/Resources.meta
+Assets/Prefab/LogItem.prefab.meta
+Assets/Prefab/LogItem.prefab
+Assets/Prefab.meta
