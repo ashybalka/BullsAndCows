@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     private int tryItem;
     private int positionNumber;
 
-    [SerializeField] Button StartButton;
+    [SerializeField] Button StartButton, PlayAgainButton;
+
     [SerializeField] Image[] TrueNumberImages;
     [SerializeField] Image[] InputNumberImages;
 
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
             TrueNumber.SetActive(false);
             GameName.SetActive(false);
             WinPanel.SetActive(false);
+            PlayAgainButton.gameObject.SetActive(false);
 
             HelpPanel.SetActive(true);
             ControlPanel.SetActive(true);
@@ -99,7 +101,7 @@ public class GameManager : MonoBehaviour
         {
             
             WinPanel.SetActive(true);
-            StartButton.gameObject.SetActive(true);
+            PlayAgainButton.gameObject.SetActive(true);
             TrueNumber.SetActive(true);
 
             HelpPanel.SetActive(false);
@@ -108,7 +110,6 @@ public class GameManager : MonoBehaviour
             LogView.SetActive(false);
 
             WinPanel.GetComponentsInChildren<TMP_Text>().Where(n => n.name == "Score").First().text = tryItem.ToString();
-            YG._FullscreenShow();
         }
     }
 
@@ -121,6 +122,12 @@ public class GameManager : MonoBehaviour
             itemNumber[positionNumber] = number;
             positionNumber++;
         }
+    }
+
+    public void Again()
+    {
+        YG._FullscreenShow();
+        StartGameButton();
     }
 
     public void NewMove()
