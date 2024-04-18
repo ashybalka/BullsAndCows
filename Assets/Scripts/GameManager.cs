@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGameButton()
     {
-
+        hint = 0;
         GenerateNumber();
 
         if (etalonNumber.Length > 0)
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         {
             string numberString = "Numbers_" + etalonNumber[i];
             TrueNumberImages[i].sprite = NumbersAll.Where(n => n.name == numberString).First();
+            HintNumberImages[i].sprite = NumbersAll.Where(n => n.name == "Numbers_Q").First();
         }
     }
 
@@ -209,7 +210,6 @@ public class GameManager : MonoBehaviour
     {
         if (hint < 4)
         {
-
             string numberString = "Numbers_" + etalonNumber[hint];
             Debug.Log(numberString);
             HintNumberImages[hint].sprite = NumbersAll.Where(n => n.name == numberString).First();
@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
 
     public void WatchAd()
     {
-        if (!AdPanel.activeSelf)
+        if (!AdPanel.activeSelf && hint < 4)
         { 
             AdPanel.SetActive(true);
         }
