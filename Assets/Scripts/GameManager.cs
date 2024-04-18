@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject LogItemPrefab;
 
-    [SerializeField] GameObject MenuPanel, WinPanel, GamePanel;
+    [SerializeField] GameObject MenuPanel, WinPanel, GamePanel, AdPanel;
 
     [SerializeField] ScrollRect scrollRect;
 
@@ -214,6 +214,24 @@ public class GameManager : MonoBehaviour
             Debug.Log(numberString);
             HintNumberImages[hint].sprite = NumbersAll.Where(n => n.name == numberString).First();
             hint++;
+            AdPanel.SetActive(false);
+        }
+    }
+
+
+    public void WatchAd()
+    {
+        if (!AdPanel.activeSelf)
+        { 
+            AdPanel.SetActive(true);
+        }
+    }
+
+    public void CloseAd()
+    {
+        if (AdPanel.activeSelf)
+        {
+            AdPanel.SetActive(false);
         }
     }
 }
