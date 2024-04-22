@@ -14,17 +14,19 @@ public class GameManager : MonoBehaviour
     private int tryItem;
     private int positionNumber;
 
-    [SerializeField] Button StartButton, PlayAgainButton;
+    private int hint;
 
     [SerializeField] Image[] TrueNumberImages;
     [SerializeField] Image[] InputNumberImages;
+    [SerializeField] Image[] HintNumberImages;
 
-    [SerializeField] GameObject GameName;
     [SerializeField] GameObject GeneratedNumber, TrueNumber;
-    [SerializeField] GameObject ControlPanel, InputNumberField, HelpPanel;
-    [SerializeField] GameObject LogView, ContentView;
+
+    [SerializeField] GameObject ContentView;
+
     [SerializeField] GameObject LogItemPrefab;
-    [SerializeField] GameObject WinPanel;
+
+    [SerializeField] GameObject MenuPanel, WinPanel, GamePanel;
 
     [SerializeField] ScrollRect scrollRect;
 
@@ -48,16 +50,11 @@ public class GameManager : MonoBehaviour
 
         if (etalonNumber.Length > 0)
         {
-            StartButton.gameObject.SetActive(false);
+            MenuPanel.SetActive(false);
             TrueNumber.SetActive(false);
-            GameName.SetActive(false);
             WinPanel.SetActive(false);
-            PlayAgainButton.gameObject.SetActive(false);
 
-            HelpPanel.SetActive(true);
-            ControlPanel.SetActive(true);
-            InputNumberField.SetActive(true);
-            LogView.SetActive(true);
+            GamePanel.SetActive(true);
         }
         GenerateTrueNumber();
 
@@ -98,16 +95,11 @@ public class GameManager : MonoBehaviour
     void WinScreen()
     {
         if (bull == 4)
-        {
-            
+        {  
             WinPanel.SetActive(true);
-            PlayAgainButton.gameObject.SetActive(true);
             TrueNumber.SetActive(true);
 
-            HelpPanel.SetActive(false);
-            ControlPanel.SetActive(false);
-            InputNumberField.SetActive(false);
-            LogView.SetActive(false);
+            GamePanel.SetActive(false);
 
             WinPanel.GetComponentsInChildren<TMP_Text>().Where(n => n.name == "Score").First().text = tryItem.ToString();
         }
@@ -192,25 +184,36 @@ public class GameManager : MonoBehaviour
         TMP_Text[] texts = newItem.GetComponentsInChildren<TMP_Text>();
         foreach ( TMP_Text text in texts ) 
         {
-            if (text.name == "ItemNumber")
+            switch (text.name)
             {
-                text.text = tryItem.ToString();
+                case ("ItemNumber"):
+                    text.text = tryItem.ToString();
+                    break;
+                case ("Cows"):
+                    text.text = cow.ToString();
+                    break;
+                case ("Bulls"):
+                    text.text = bull.ToString();
+                    break;
+                case ("Number"):
+                    text.text = finalScore.ToString("D4");
+                    break;
             }
-            else if (text.name == "Cows")
-            {
-                text.text = cow.ToString();
-            }
-            else if (text.name == "Bulls")
-            {
-                text.text = bull.ToString();
-            }
-            else if (text.name == "Number")
-            {
-                text.text = finalScore.ToString("D4");
-            }
-            Canvas.ForceUpdateCanvases();
-            scrollRect.verticalNormalizedPosition = 0;
-            Canvas.ForceUpdateCanvases();
+        }
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = 0;
+        Canvas.ForceUpdateCanvases();
+    }
+
+    public void AddHint()
+    {
+        if (hint < 4)
+        {
+
+            string numberString = "Numbers_" + etalonNumber[hint];
+            Debug.Log(numberString);
+            HintNumberImages[hint].sprite = NumbersAll.Where(n => n.name == numberString).First();
+            hint++;
         }
     }
 }
