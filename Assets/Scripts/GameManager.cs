@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
     private int tryItem;
     private int positionNumber;
 
+
+    public int thisTry;
+    public int totalGames;
+    public double averageTry;
+
+
     private int hint;
 
     [SerializeField] Image[] TrueNumberImages;
@@ -96,7 +102,8 @@ public class GameManager : MonoBehaviour
     void WinScreen()
     {
         if (bull == 4)
-        {  
+        {
+            //GetAverage();
             WinPanel.SetActive(true);
             TrueNumber.SetActive(true);
 
@@ -234,4 +241,13 @@ public class GameManager : MonoBehaviour
             AdPanel.SetActive(false);
         }
     }
+
+    /*
+    public void GetAverage()
+    {
+        thisTry = tryItem;
+        totalGames++;
+        //averageTry = 
+    }
+    */
 }
